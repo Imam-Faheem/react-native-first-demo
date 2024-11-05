@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 import { fetchHistoricalWeather } from '../utils/weatherAPI';
 import { HistoricalData } from '../utils/types';
 import HistoricalCard from '../components/HistoricalCard';
@@ -13,6 +13,10 @@ const HistoricalWeatherScreen = () => {
   const { showSnackbar } = useSnackbar();
 
   const fetchHistoricalData = async () => {
+    if (!city.trim()) {
+      showSnackbar('Please enter a city name.'); 
+      return;
+    }
     if (!city) {
       showSnackbar("Please enter a city.");
       return;
@@ -32,7 +36,6 @@ const HistoricalWeatherScreen = () => {
 
     try {
       const { historicalWeather, errormessage } = await fetchHistoricalWeather(city, date);
-      console.log("🚀 ~ fetchHistoricalData ~ errormessage:", errormessage)
       if (errormessage || !historicalWeather) {
         showSnackbar(errormessage || "No historical data available for this date.");
         return;
@@ -46,7 +49,7 @@ const HistoricalWeatherScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <Ionicons name="location-outline" size={20} color="#555" style={styles.icon} />
         <TextInput
@@ -71,7 +74,7 @@ const HistoricalWeatherScreen = () => {
       {historicalData && (
         <HistoricalCard historicalData={historicalData} />
       )}
-    </View>
+    </ScrollView>
   );
 };
 

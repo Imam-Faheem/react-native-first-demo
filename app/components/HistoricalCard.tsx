@@ -22,7 +22,7 @@ const HistoricalCard: React.FC<{ historicalData: HistoricalData }> = ({ historic
     const chartHeight = 220; // You can adjust this height as needed
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <Animated.View entering={FadeIn} exiting={FadeOut} style={styles.locationContainer}>
                 <Text style={styles.title}>Location Details</Text>
                 <View style={styles.infoRow}>

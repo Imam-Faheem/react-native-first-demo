@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { fetchForecast } from '../utils/weatherAPI';
-import { ForecastData } from '../utils/types';
 import ForecastCard from '../components/ForecastCard';
 import { useSnackbar } from '@/context/SnackbarContext'; // Adjust the path as needed
 import { Ionicons } from '@expo/vector-icons';
+import { Forecast } from '../utils/types';
 
 const ForecastScreen = () => {
   const [city, setCity] = useState(''); // State to hold the input city
-  const [forecastData, setForecastData] = useState<ForecastData | null>(null);
+  const [forecastData, setForecastData] = useState<Forecast | null>(null); // Update state to use Forecast type
   const { showSnackbar } = useSnackbar(); // Access snackbar context
 
   const fetchForecastData = async () => {
@@ -30,7 +30,7 @@ const ForecastScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Get Weather Forecast</Text>
       <View style={styles.inputContainer}>
         <Ionicons name="location-outline" size={20} color="#555" style={styles.icon} />
@@ -45,20 +45,14 @@ const ForecastScreen = () => {
         <Text style={styles.buttonText}>Get Forecast</Text>
       </TouchableOpacity>
 
-      {forecastData && (
-        <FlatList
-          data={forecastData.forecast.forecastday}
-          keyExtractor={(item) => item.date}
-          renderItem={({ item }) => (
-            <ForecastCard
-              date={item.date}
-              temperature={item.day.avgtemp_c}
-              condition={item.day.condition.text}
-            />
-          )}
+      {forecastData && 
+        <ForecastCard
+          location={forecastData.location}
+          current={forecastData.current} 
+          forecast={forecastData.forecast} 
         />
-      )}
-    </View>
+      }
+    </ScrollView>
   );
 };
 
@@ -97,7 +91,7 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
     color: '#333',
-    paddingLeft:10
+    paddingLeft: 10,
   },
   button: {
     backgroundColor: '#FFA726',
@@ -111,6 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
 });
 
 export default ForecastScreen;

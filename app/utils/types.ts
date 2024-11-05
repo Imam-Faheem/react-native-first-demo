@@ -102,3 +102,69 @@ export interface HistoricalData {
         }>;
     };
 }
+
+
+
+export interface Location {
+    country: string;
+    lat: number;
+    localtime: string;
+    localtime_epoch: number;
+    lon: number;
+    name: string;
+    region: string;
+    tz_id: string;
+  }
+  
+  export interface CurrentWeather {
+    temperature: number;
+    condition: WeatherCondition;
+    temp_c: number;
+    temp_f: number;
+  }
+  
+  export interface Astro {
+    sunrise: string;
+    sunset: string;
+    moonrise: string;
+    moonset: string;
+    moon_phase: string;
+  }
+  
+  export interface HourlyWeather {
+    air_quality: {
+      co: number;
+      no2: number;
+      o3: number;
+      so2: number;
+      pm2_5: number;
+    };
+    chance_of_rain: number;
+    chance_of_snow: number;
+    cloud: number;
+    condition: {
+      text: string;
+    };
+  }
+  
+  export interface ForecastDay {
+    astro: Astro;
+    date: string;
+    date_epoch: number;
+    day: {
+      maxtemp_c: number;
+      maxtemp_f: number;
+      mintemp_c: number;
+      mintemp_f: number;
+      avgtemp_c: number;
+    };
+    hour: HourlyWeather[];
+  }
+  
+  export interface Forecast {
+    location: Location;
+    current: CurrentWeather;
+    forecast: {
+        forecastday: ForecastDay[];
+      };
+  }
