@@ -10,6 +10,19 @@ This is a simple weather forecasting app created with Expo in just 4 hours. It a
 
 - **City Search**: Enter any city to fetch the latest weather data.
 
+
+## Screenshots
+
+### Home Screen
+![Home Screen](./images/home.png)
+
+### Forecast Screen
+![Forecast Screen](./images/forecast.png)
+
+### Chart Screen
+![Historical data Screen](./images/historic.png)
+
+
 ## Getting Started
 
 ### Prerequisites
