@@ -1,14 +1,13 @@
 // NotFoundScreen.tsx
-import { router } from 'expo-router';
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
 const NotFoundScreen = ({ onTryAgain }: { onTryAgain: () => void }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Page Not Found</Text>
-      <Text style={styles.message}>The page you're looking for doesn't exist.</Text>
-      <Button title="Go to Back Home" onPress={() => router.push('/')} />
+      <Text style={styles.title}>City Not Found</Text>
+      <Text style={styles.message}>We couldn't find the weather information for the city you entered. Please try again.</Text>
+      <Button title="Try Again" onPress={onTryAgain} />
     </View>
   );
 };
