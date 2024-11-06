@@ -1,6 +1,6 @@
 ## Welcome to your Weather App! 🌤️
 
-This is my first weather forecasting app created with Expo in just 4 hours. It allows users to view the weather forecast of a city by fetching data from a weather API. It uses api of weatherapi.com
+This is my first weather forecasting app created with Expo in just 4 hours. It allows users to view the weather forecast of a city by fetching data from a weather API. It uses API of weatherapi.com
 
 ## Features
 
